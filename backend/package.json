@@ -1,0 +1,30 @@
+{
+  "name": "ras-api",
+  "version": "1.0.0",
+  "description": "backend for restaurant-automation-system",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "dev": "nodemon index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shubhamjha25/RAS-API.git"
+  },
+  "author": "Shubham Jha",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shubhamjha25/RAS-API/issues"
+  },
+  "homepage": "https://github.com/shubhamjha25/RAS-API#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "crypto-js": "^4.1.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.12",
+    "nodemon": "^2.0.15",
+    "stripe": "^8.188.0"
+  }
+}
