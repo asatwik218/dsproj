@@ -13,9 +13,12 @@ const GetFeedbacks = () => {
 	if (token) isAuth = true;
 
 	const getFeedbacks = async () => {
-		const res = await axios.get("http://localhost:8000/feedbacks/all/", {
-			headers: { token: token },
-		});
+		const res = await axios.get(
+			`${process.env.REACT_APP_SERVER_URL}/feedbacks/all/`,
+			{
+				headers: { token: token },
+			}
+		);
 		setFeedbacks(res.data);
 		setTotalFeedbacks(res.data.length);
 		// Average Rating Calculation

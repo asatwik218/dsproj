@@ -52,11 +52,14 @@ const CustomerRegister = () => {
 	const registerSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const res = await axios.post("http://localhost:8000/auth/register", {
-				username: user.username,
-				email: user.email,
-				password: user.password,
-			});
+			const res = await axios.post(
+				`${process.env.REACT_APP_SERVER_URL}/auth/register`,
+				{
+					username: user.username,
+					email: user.email,
+					password: user.password,
+				}
+			);
 			setUser({ username: "", email: "", password: "" });
 			notify("Registration Successful");
 			return navigate("/customer/login");

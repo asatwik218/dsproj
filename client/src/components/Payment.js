@@ -26,7 +26,7 @@ const Payment = (props) => {
 	const deleteCart = async (id) => {
 		try {
 			if (props.token) {
-				await axios.delete(`http://localhost:8000/carts/${id}`, {
+				await axios.delete(`${process.env.REACT_APP_SERVER_URL}/carts/${id}`, {
 					headers: { token: props.token },
 				});
 			}
@@ -41,12 +41,16 @@ const Payment = (props) => {
 			username: props.username,
 			items: props.items,
 			amount: props.amount,
-			tax:props.tax
+			tax: props.tax,
 		};
-		console.log(orderBody)
-		const res = await axios.post("http://localhost:8000/orders/", orderBody, {
-			headers: { token: props.token },
-		});
+		console.log(orderBody);
+		const res = await axios.post(
+			`${process.env.REACT_APP_SERVER_URL}/orders/`,
+			orderBody,
+			{
+				headers: { token: props.token },
+			}
+		);
 		localStorage.setItem("orderId", res.data._id);
 		deleteCart(props.cartId);
 		notify("Order Placed! 🥳");

@@ -7,13 +7,14 @@ const PrintBill = () => {
 	const [order, setOrder] = useState({});
 
 	const getOrderDetails = async (billId) => {
-		billId = (localStorage.getItem("orderId"))
-		const res = await axios.get(`http://localhost:8000/orders/find/${billId}`);
+		billId = localStorage.getItem("orderId");
+		const res = await axios.get(
+			`${process.env.REACT_APP_SERVER_URL}/orders/find/${billId}`
+		);
 		if (res.data) {
 			setOrder(res.data);
 		}
 		console.log(order);
-
 	};
 
 	useEffect(() => {
@@ -87,10 +88,8 @@ const PrintBill = () => {
 							<td>
 								<strong>Subtotal</strong>
 							</td>
-							{
-
-							}
-							<td>{(order.amount - order.tax)}</td>
+							{}
+							<td>{order.amount - order.tax}</td>
 						</tr>
 						<tr>
 							<td>

@@ -12,7 +12,7 @@ const ViewOrders = () => {
 	if (token) isAuth = true;
 
 	const getOrders = async () => {
-		const res = await axios.get("http://localhost:8000/orders/", {
+		const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/orders/`, {
 			headers: { token: token },
 		});
 		setOrders(res.data);

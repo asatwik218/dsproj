@@ -21,7 +21,7 @@ const GenerateReport = () => {
 	if (token) isAuth = true;
 
 	const getOrders = async () => {
-		const res = await axios.get("http://localhost:8000/orders/", {
+		const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/orders/`, {
 			headers: { token: token },
 		});
 		setOrders(res.data);
@@ -37,9 +37,12 @@ const GenerateReport = () => {
 	};
 
 	const getSales = async () => {
-		const res = await axios.get("http://localhost:8000/orders/income", {
-			headers: { token: token },
-		});
+		const res = await axios.get(
+			`${process.env.REACT_APP_SERVER_URL}/orders/income`,
+			{
+				headers: { token: token },
+			}
+		);
 		sales.push(res.data);
 		console.log(currentMonth, " & ", prevMonth);
 		console.log(sales);
@@ -53,7 +56,7 @@ const GenerateReport = () => {
 			}
 		}
 		console.log(currentIncome, " & ", prevIncome);
-		setPrevIncome((prevIncome) => prevIncome===0?1:prevIncome);
+		setPrevIncome((prevIncome) => (prevIncome === 0 ? 1 : prevIncome));
 	};
 
 	useEffect(() => {
@@ -80,19 +83,14 @@ const GenerateReport = () => {
 			{parseFloat(((currentIncome - prevIncome) / prevIncome) * 100) > 0 ? (
 				<p className='positive-sales'>
 					<strong>
-						+
-						{parseFloat(
-							((currentIncome - prevIncome) / prevIncome) * 100
-						)}
+						+{parseFloat(((currentIncome - prevIncome) / prevIncome) * 100)}
 						{"     "}Sales Growth
 					</strong>
 				</p>
 			) : (
 				<p className='negative-sales'>
 					<strong>
-						{parseFloat(
-							((currentIncome - prevIncome) / prevIncome) * 100
-						)}
+						{parseFloat(((currentIncome - prevIncome) / prevIncome) * 100)}
 						{"     "}Sales Decline
 					</strong>
 				</p>

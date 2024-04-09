@@ -37,7 +37,7 @@ const SendFeedback = (props) => {
 		e.preventDefault();
 		try {
 			const res = await axios.post(
-				"http://localhost:8000/feedbacks/new",
+				`${process.env.REACT_APP_SERVER_URL}/feedbacks/new`,
 				feedbackBody,
 				{ headers: { token: props.token } }
 			);

@@ -28,17 +28,23 @@ const GetUsers = () => {
 	if (token) isAuth = true;
 
 	const getUsers = async () => {
-		const res = await axios.get("http://localhost:8000/users?new=true", {
-			headers: { token: token },
-		});
+		const res = await axios.get(
+			`${process.env.REACT_APP_SERVER_URL}/users?new=true`,
+			{
+				headers: { token: token },
+			}
+		);
 		setUsers(res.data);
 		setTotalUsers(res.data.length);
 	};
 
 	const getUsersByMonth = async () => {
-		const res = await axios.get("http://localhost:8000/users/stats", {
-			headers: { token: token },
-		});
+		const res = await axios.get(
+			`${process.env.REACT_APP_SERVER_URL}/users/stats`,
+			{
+				headers: { token: token },
+			}
+		);
 		setUsersByMonth(res.data);
 	};
 

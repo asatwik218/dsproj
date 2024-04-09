@@ -10,9 +10,10 @@ const OrderSuccess = () => {
 	const orderId = localStorage.getItem("orderId");
 
 	const getOrderSummary = async () => {
-		const res = await axios.get(`http://localhost:8000/orders/find/${orderId}`);
+		const res = await axios.get(
+			`${process.env.REACT_APP_SERVER_URL}/orders/find/${orderId}`
+		);
 		setOrderSummary(res.data);
-
 	};
 
 	useEffect(() => {
@@ -69,7 +70,7 @@ const OrderSuccess = () => {
 								<h2>ORDER SUMMARY</h2>
 								<hr />
 								<br />
-								<h3>Subtotal: {(orderSummary.amount - orderSummary.tax)}</h3>
+								<h3>Subtotal: {orderSummary.amount - orderSummary.tax}</h3>
 								<h3>Other Taxes: {orderSummary.tax}</h3>
 								<br />
 								<h3>Order Total: INR {orderSummary.amount}</h3>

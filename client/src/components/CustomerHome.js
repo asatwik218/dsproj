@@ -37,14 +37,17 @@ const Home = () => {
 	};
 
 	const getItems = async () => {
-		const res = await axios.get("http://localhost:8000/items");
+		const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/items`);
 		setItems(res.data);
 	};
 
 	const addToCart = async (item) => {
-		const getCart = await axios.get(`http://localhost:8000/carts/find/${id}`, {
-			headers: { token: token },
-		});
+		const getCart = await axios.get(
+			`${process.env.REACT_APP_SERVER_URL}/carts/find/${id}`,
+			{
+				headers: { token: token },
+			}
+		);
 		setCart(getCart.data);
 		// if cart is initially empty, create a new cart
 		if (!getCart.data) {
@@ -61,7 +64,7 @@ const Home = () => {
 				],
 			};
 			const newCart = await axios.post(
-				"http://localhost:8000/carts/",
+				`${process.env.REACT_APP_SERVER_URL}/carts/`,
 				cartBody,
 				{ headers: { token: token } }
 			);
@@ -77,7 +80,7 @@ const Home = () => {
 				if (item._id === getCart.data.items[i].itemId) {
 					getCart.data.items[i].quantity += 1;
 					const updatedCart = await axios.put(
-						`http://localhost:8000/carts/${getCart.data._id}`,
+						`${process.env.REACT_APP_SERVER_URL}/carts/${getCart.data._id}`,
 						getCart.data,
 						{ headers: { token: token } }
 					);
@@ -98,7 +101,7 @@ const Home = () => {
 				};
 				getCart.data.items.push(itemObject);
 				const updatedCart = await axios.put(
-					`http://localhost:8000/carts/${getCart.data._id}`,
+					`${process.env.REACT_APP_SERVER_URL}/carts/${getCart.data._id}`,
 					getCart.data,
 					{ headers: { token: token } }
 				);

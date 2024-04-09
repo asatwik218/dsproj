@@ -22,10 +22,13 @@ const StaffLogin = () => {
 	const adminLoginSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const res = await axios.post("http://localhost:8000/auth/login", {
-				username: user.username,
-				password: user.password,
-			});
+			const res = await axios.post(
+				`${process.env.REACT_APP_SERVER_URL}/auth/login`,
+				{
+					username: user.username,
+					password: user.password,
+				}
+			);
 			if (res.data.isAdmin) {
 				setErr("Admin Login Has a Separate Page");
 				return;

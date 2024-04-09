@@ -24,7 +24,7 @@ function EditItem({ match }) {
 		const getItem = async () => {
 			if (paramId) {
 				const res = await axios.get(
-					`http://localhost:8000/items/find/${paramId}`
+					`${process.env.REACT_APP_SERVER_URL}/items/find/${paramId}`
 				);
 				setItem({
 					title: res.data.title,
@@ -57,9 +57,13 @@ function EditItem({ match }) {
 					id,
 				};
 
-				await axios.put(`http://localhost:8000/items/${item.id}`, newItem, {
-					headers: { token: token },
-				});
+				await axios.put(
+					`${process.env.REACT_APP_SERVER_URL}/items/${item.id}`,
+					newItem,
+					{
+						headers: { token: token },
+					}
+				);
 
 				return navigate("/admin/items");
 			}

@@ -39,7 +39,7 @@ const Waiter = () => {
 
 	const markAsCompleted = async (orderId) => {
 		const res = await axios.put(
-			`http://localhost:8000/orders/statusUpdate/${orderId}`,
+			`${process.env.REACT_APP_SERVER_URL}/orders/statusUpdate/${orderId}`,
 			{ status: "completed" },
 			{ headers: { token: token } }
 		);
@@ -55,9 +55,12 @@ const Waiter = () => {
 	};
 
 	const getOrders = async () => {
-		const res = await axios.get(`http://localhost:8000/orders/getOrders`, {
-			headers: { token: token },
-		});
+		const res = await axios.get(
+			`${process.env.REACT_APP_SERVER_URL}/orders/getOrders`,
+			{
+				headers: { token: token },
+			}
+		);
 		setOrders(res.data);
 		if (res.data !== null) {
 			setTotalOrder(res.data.length);

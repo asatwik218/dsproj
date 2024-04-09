@@ -21,7 +21,7 @@ const CustomerOrders = () => {
 
 	const getOrders = async () => {
 		const res = await axios.get(
-			`http://localhost:8000/orders/userOrder/${id}`,
+			`${process.env.REACT_APP_SERVER_URL}/orders/userOrder/${id}`,
 			{ headers: { token: token } }
 		);
 		setOrders(res.data);

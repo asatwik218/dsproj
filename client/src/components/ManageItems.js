@@ -12,7 +12,7 @@ const ManageItems = () => {
 	const [items, setItems] = useState([]);
 
 	const getItems = async () => {
-		const res = await axios.get("http://localhost:8000/items");
+		const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/items`);
 		setItems(res.data);
 	};
 
@@ -23,7 +23,7 @@ const ManageItems = () => {
 	const deleteItem = async (id) => {
 		try {
 			if (token) {
-				await axios.delete(`http://localhost:8000/items/${id}`, {
+				await axios.delete(`${process.env.REACT_APP_SERVER_URL}/items/${id}`, {
 					headers: { token: token },
 				});
 				getItems();
@@ -46,7 +46,7 @@ const ManageItems = () => {
 			<h3>Here are the available items</h3>
 			<br />
 			<div className='menu-items-container'>
-				{items.map((item,idx) => {
+				{items.map((item, idx) => {
 					return (
 						<div className='item-card' key={idx}>
 							<img className='item-card-img' src={item.img} alt='food-avatar' />

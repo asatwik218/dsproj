@@ -35,7 +35,7 @@ const AddMenuItems = () => {
 					price,
 				};
 
-				await axios.post("http://localhost:8000/items", newItem, {
+				await axios.post(`${process.env.REACT_APP_SERVER_URL}/items`, newItem, {
 					headers: { token: token },
 				});
 

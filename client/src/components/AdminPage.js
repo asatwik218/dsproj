@@ -23,12 +23,15 @@ const AdminPage = () => {
 		e.preventDefault();
 		console.log(user);
 		try {
-			const res = await axios.post("http://localhost:8000/auth/login", {
-				username: user.username,
-				password: user.password,
-			});
+			const res = await axios.post(
+				`${process.env.REACT_APP_SERVER_URL}/auth/login`,
+				{
+					username: user.username,
+					password: user.password,
+				}
+			);
 			if (!res.data.isAdmin) {
-				console.log(res.data)
+				console.log(res.data);
 				setErr("Only The Admin is Allowed To Access");
 				return;
 			}

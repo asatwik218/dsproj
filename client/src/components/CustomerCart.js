@@ -27,9 +27,12 @@ const CustomerCart = () => {
 	const [cart, setCart] = useState({});
 
 	const getCart = async () => {
-		const res = await axios.get(`http://localhost:8000/carts/find/${userId}`, {
-			headers: { token: token },
-		});
+		const res = await axios.get(
+			`${process.env.REACT_APP_SERVER_URL}/carts/find/${userId}`,
+			{
+				headers: { token: token },
+			}
+		);
 		setCart(res.data);
 		if (res.data) {
 			var amt = 0;
@@ -37,16 +40,15 @@ const CustomerCart = () => {
 				amt += res.data.items[i].price * res.data.items[i].quantity;
 			}
 			setTotalAmount((totalAmount) => totalAmount + amt);
-			setTax(amt*0.18)
-			setTotalAmount((totalAmount) => totalAmount + amt*0.18);
-			
+			setTax(amt * 0.18);
+			setTotalAmount((totalAmount) => totalAmount + amt * 0.18);
 		}
 	};
 
 	const deleteCart = async (id) => {
 		try {
 			if (token) {
-				await axios.delete(`http://localhost:8000/carts/${id}`, {
+				await axios.delete(`${process.env.REACT_APP_SERVER_URL}/carts/${id}`, {
 					headers: { token: token },
 				});
 			}
@@ -63,7 +65,7 @@ const CustomerCart = () => {
 			}
 		}
 		const updatedCart = await axios.put(
-			`http://localhost:8000/carts/${cart._id}`,
+			`${process.env.REACT_APP_SERVER_URL}/carts/${cart._id}`,
 			cart,
 			{ headers: { token: token } }
 		);
@@ -83,7 +85,7 @@ const CustomerCart = () => {
 			}
 		}
 		const updatedCart = await axios.put(
-			`http://localhost:8000/carts/${cart._id}`,
+			`${process.env.REACT_APP_SERVER_URL}/carts/${cart._id}`,
 			cart,
 			{ headers: { token: token } }
 		);
@@ -171,7 +173,7 @@ const CustomerCart = () => {
 									<h1>ORDER SUMMARY</h1>
 									<hr />
 									<br />
-									<h3>Subtotal: {(totalAmount - tax)}</h3>
+									<h3>Subtotal: {totalAmount - tax}</h3>
 									<h3>GST: {tax}</h3>
 									<br />
 									<h3>Order Total: INR {totalAmount}</h3>
